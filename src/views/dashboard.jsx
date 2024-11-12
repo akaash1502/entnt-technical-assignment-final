@@ -9,65 +9,67 @@ import {
   Transition,
 } from "@headlessui/react";
 
-import JobCard from "../components/Card"
+import JobCard from "../components/Card";
 import { JobContext } from "../context/jobContext";
-import { useJobAndAssessment } from '../hooks/useJobandAssesment';
+import { useJobAndAssessment } from "../hooks/useJobandAssesment";
 
 export default function Dashboard() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
 
   const [openJobId, setOpenJobId] = useState(null);
-  const { jobs, addJob, deleteJob } = useContext(JobContext); 
-  
+  const { jobs, addJob, deleteJob } = useContext(JobContext);
+
   const [filteredJobs, setFilteredJobs] = useState(jobs);
-  const [searchtext,setSearchText] = useState("");
-  const {  
-    deleteJobAndAssessment, 
-  } = useJobAndAssessment();
+  const [searchtext, setSearchText] = useState("");
+  const { deleteJobAndAssessment } = useJobAndAssessment();
 
   //for adding a new job
   const [newJob, setNewJob] = useState({
     id: Date.now().toString(),
     title: "",
     description: "",
-    totalCandidatesApplied: []
+    totalCandidatesApplied: [],
   });
 
   const [isAddJobModalOpen, setAddJobModalOpen] = useState(false);
 
-  const handleAddJob = () => {// Ensure unique ID
+  const handleAddJob = () => {
+    // Ensure unique ID
     addJob(newJob); // Use context-provided addJob function
     setFilteredJobs([...jobs, newJob]); // Update filteredJobs to include the new job
-    setNewJob({ id: Date.now().toString(), title: "", description: "", totalCandidatesApplied: [] }); // Reset new job form
+    setNewJob({
+      id: Date.now().toString(),
+      title: "",
+      description: "",
+      totalCandidatesApplied: [],
+    }); // Reset new job form
     setAddJobModalOpen(false); // Close modal after adding
   };
 
   // Handle deleting a job by ID
   const handleDelete = (id) => {
     // deleteJob(id);
-     // Use context-provided deleteJob function
-     deleteJobAndAssessment(id);
-    setFilteredJobs(filteredJobs.filter(job => job.id !== id)); // Update filteredJobs
+    // Use context-provided deleteJob function
+    deleteJobAndAssessment(id);
+    setFilteredJobs(filteredJobs.filter((job) => job.id !== id)); // Update filteredJobs
   };
 
   const handleCardClick = (jobId) => {
     setOpenJobId((prev) => (prev === jobId ? null : jobId)); // Toggle the open/close state
   };
 
-
-
-  useEffect(()=>{
-    if(searchtext.trim() === ""){
+  useEffect(() => {
+    if (searchtext.trim() === "") {
       setFilteredJobs(jobs);
     } else {
       setFilteredJobs(
-        jobs.filter(job =>
+        jobs.filter((job) =>
           job.title.toLowerCase().includes(searchtext.toLowerCase())
         )
       );
     }
-  },[searchtext,jobs]);
+  }, [searchtext, jobs]);
 
   return (
     <>
@@ -186,7 +188,7 @@ export default function Dashboard() {
                   <span className="grow py-2">Manage</span>
                 </a>
                 <Link
-                  to='/assementlist'
+                  to="/assementlist"
                   className="group flex items-center gap-2 rounded-lg border border-transparent px-2.5 text-sm font-medium text-gray-200 hover:bg-gray-700/75 hover:text-white active:border-gray-600"
                 >
                   <span className="flex flex-none items-center text-gray-500 group-hover:text-gray-300">
@@ -230,7 +232,6 @@ export default function Dashboard() {
                     </svg>
                   </span>
                   <span className="grow py-2">Clients</span>
-               
                 </a>
                 <a
                   href="#"
@@ -253,8 +254,12 @@ export default function Dashboard() {
                       />
                     </svg>
                   </span>
-                  <span className="grow py-2" onClick={() => setAddJobModalOpen(true)}>Add New</span>
-                  
+                  <span
+                    className="grow py-2"
+                    onClick={() => setAddJobModalOpen(true)}
+                  >
+                    Add New
+                  </span>
                 </a>
                 <div className="px-3 pb-2 pt-5 text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Account
@@ -398,26 +403,30 @@ export default function Dashboard() {
 
               {/* Search */}
               <div className="flex flex-row space-x-3">
-                  <input
-                    type="text"
-                    className="block w-full rounded-lg border border-gray-200 py-2 text-sm leading-5 placeholder-gray-400 focus:border-teal-500 focus:ring focus:ring-teal-500/50 dark:border-gray-700 dark:bg-gray-900/25 dark:focus:border-teal-500 p-3"
-                    id="search"
-                    name="search"
-                    value={searchtext}
-                    placeholder="Search.."
-                    onChange={(e) => {setSearchText(e.target.value)}}
-                  />
-                  <button
+                <input
+                  type="text"
+                  className="block w-full rounded-lg border border-gray-200 py-2 text-sm leading-5 placeholder-gray-400 focus:border-teal-500 focus:ring focus:ring-teal-500/50 dark:border-gray-700 dark:bg-gray-900/25 dark:focus:border-teal-500 p-3"
+                  id="search"
+                  name="search"
+                  value={searchtext}
+                  placeholder="Search.."
+                  onChange={(e) => {
+                    setSearchText(e.target.value);
+                  }}
+                />
+                <button
                   type="button"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-semibold leading-5 text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300/25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600/40 dark:active:border-gray-700"
                   onClick={() => {
                     console.log(searchtext);
-                    if(searchtext.trim() === ""){
+                    if (searchtext.trim() === "") {
                       setFilteredJobs(listofJobs);
-                    }else{
+                    } else {
                       const temp = listofJobs.filter((job) => {
-                        console.log('filtering');
-                         return job.title.toLowerCase().includes(searchtext.toLowerCase())
+                        console.log("filtering");
+                        return job.title
+                          .toLowerCase()
+                          .includes(searchtext.toLowerCase());
                       });
                       setFilteredJobs(temp);
                     }
@@ -436,9 +445,9 @@ export default function Dashboard() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>               
+                </button>
               </div>
-              
+
               {/* END Search */}
             </div>
             {/* END Left Section */}
@@ -470,53 +479,58 @@ export default function Dashboard() {
             {/* Right Section */}
             <div className="flex items-center gap-2">
               {/* Notifications */}
-              
-                {/* Add Job Modal */}
-      {/* Add Job Modal */}
-{isAddJobModalOpen && (
-  <div
-    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-  >
-    <div className="modal-content p-5 border rounded-lg bg-white shadow-md w-96">
-      <h3 className="text-lg font-bold mb-4 text-black">Add New Job</h3>
-      <input
-        type="text"
-        placeholder="Job ID"
-        className="mb-2 w-full border rounded p-2 text-black"
-        value={newJob.id}
-        onChange={(e) => setNewJob({ ...newJob, id: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="Job Title"
-        className="mb-2 w-full border rounded p-2 text-black"
-        value={newJob.title}
-        onChange={(e) => setNewJob({ ...newJob, title: e.target.value })}
-      />
-      <textarea
-        placeholder="Job Description"
-        className="mb-4 w-full border rounded p-2 text-black"
-        value={newJob.description}
-        onChange={(e) => setNewJob({ ...newJob, description: e.target.value })}
-      />
-      <button
-        type="button"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-semibold leading-5 text-gray-300 hover:border-gray-600 hover:text-gray-200 hover:shadow-sm focus:ring focus:ring-gray-600/40 active:border-gray-700 active:shadow-none"
-        onClick={handleAddJob}
-      >
-        Add Job
-      </button>
-      <button
-        type="button"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-semibold leading-5 text-gray-300 hover:border-gray-600 hover:text-gray-200 hover:shadow-sm focus:ring focus:ring-gray-600/40 active:border-gray-700 active:shadow-none mt-2"
-        onClick={() => setAddJobModalOpen(false)}
-      >
-        Cancel
-      </button>
-    </div>
-  </div>
-)}
 
+              {/* Add Job Modal */}
+              {/* Add Job Modal */}
+              {isAddJobModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                  <div className="modal-content p-5 border rounded-lg bg-white shadow-md w-96">
+                    <h3 className="text-lg font-bold mb-4 text-black">
+                      Add New Job
+                    </h3>
+                    <input
+                      type="text"
+                      placeholder="Job ID"
+                      className="mb-2 w-full border rounded p-2 text-black"
+                      value={newJob.id}
+                      onChange={(e) =>
+                        setNewJob({ ...newJob, id: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Job Title"
+                      className="mb-2 w-full border rounded p-2 text-black"
+                      value={newJob.title}
+                      onChange={(e) =>
+                        setNewJob({ ...newJob, title: e.target.value })
+                      }
+                    />
+                    <textarea
+                      placeholder="Job Description"
+                      className="mb-4 w-full border rounded p-2 text-black"
+                      value={newJob.description}
+                      onChange={(e) =>
+                        setNewJob({ ...newJob, description: e.target.value })
+                      }
+                    />
+                    <button
+                      type="button"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-semibold leading-5 text-gray-300 hover:border-gray-600 hover:text-gray-200 hover:shadow-sm focus:ring focus:ring-gray-600/40 active:border-gray-700 active:shadow-none"
+                      onClick={handleAddJob}
+                    >
+                      Add Job
+                    </button>
+                    <button
+                      type="button"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-semibold leading-5 text-gray-300 hover:border-gray-600 hover:text-gray-200 hover:shadow-sm focus:ring focus:ring-gray-600/40 active:border-gray-700 active:shadow-none mt-2"
+                      onClick={() => setAddJobModalOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* User Dropdown */}
               <Menu as="div" className="relative inline-block">
@@ -722,25 +736,27 @@ export default function Dashboard() {
         {/* END Page Header */}
 
         {/* Page Content */}
-        <main id="page-content" className="flex max-w-full flex-auto flex-col pt-16">
-          
+        <main
+          id="page-content"
+          className="flex max-w-full flex-auto flex-col pt-16"
+        >
           <div className="container mx-auto w-full p-4 lg:p-8 xl:max-w-7xl">
-    {/* Scrollable List Container */}
-    <div 
-      className="scrollable-div flex flex-col cursor-pointer justify-between rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-gray-400 dark:border-gray-700 dark:bg-gray-800 overflow-y-auto" 
-      style={{ maxHeight: '70vh' }} 
-    >
-      {filteredJobs.map((job) => (
-        <JobCard 
-        key={job.id} 
-        job={job} 
-        handleDelete={handleDelete} 
-        isExpanded={openJobId === job.id}
-        handleCardClick={() => handleCardClick(job.id)}
-        />
-      ))}
-    </div>
-  </div>
+            {/* Scrollable List Container */}
+            <div
+              className="scrollable-div flex flex-col cursor-pointer justify-between rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-gray-400 dark:border-gray-700 dark:bg-gray-800 overflow-y-auto"
+              style={{ maxHeight: "70vh" }}
+            >
+              {filteredJobs.map((job) => (
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  handleDelete={handleDelete}
+                  isExpanded={openJobId === job.id}
+                  handleCardClick={() => handleCardClick(job.id)}
+                />
+              ))}
+            </div>
+          </div>
         </main>
         {/* END Page Content */}
 
@@ -758,7 +774,6 @@ export default function Dashboard() {
               >
                 GitHub
               </a>{" "}
-              
             </div>
             <div className="inline-flex items-center justify-center pb-4 pt-1 md:pt-4">
               <span>Crafted with</span>
@@ -780,8 +795,7 @@ export default function Dashboard() {
                   href="https://pixelcave.com"
                   target="_blank"
                   className="font-medium text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300"
-                >
-                </a>
+                ></a>
               </span>
             </div>
           </div>

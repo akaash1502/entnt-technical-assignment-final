@@ -1,7 +1,7 @@
 
-# EntNT Technical Assignment
+# ENTNT Technical Assignment
 
-Welcome to the **EntNT Technical Assignment** project. This repository contains the source code for a Web Hiring Platform Application. The application enables job posting management, candidate tracking, and job-specific assessment creation.
+This repository contains the source code for a Web Hiring Platform Application. The application enables job posting management, candidate tracking, and job-specific assessment creation.
 
 ---
 
@@ -14,7 +14,6 @@ Welcome to the **EntNT Technical Assignment** project. This repository contains 
 5. [Deployment](#deployment)  
 6. [Testing & Validation](#testing--validation)  
 7. [Test Data](#test-data)  
-8. [Contributing](#contributing)  
 
 ---
 
@@ -95,17 +94,6 @@ Ensure you have the following installed:
 The application is deployed on Vercel and can be accessed at the following URL:  
 **[Live Application](https://entnt-technical-assignment-final.vercel.app/)**  
 
-### **To Redeploy or Modify**
-
-1. Make changes to the repository locally.  
-2. Push the updates to the `main` branch:  
-   ```bash
-   git add .
-   git commit -m "Your commit message"
-   git push origin main
-   ```
-3. Vercel will automatically trigger a new deployment.  
-
 ---
 
 ## **Testing & Validation**
@@ -122,11 +110,6 @@ The application is deployed on Vercel and can be accessed at the following URL:
    - Creating, editing, and removing assessments.  
    - Validation for duplicate or empty data entries.  
 
-### **Validation**
-
-- Ensure smooth navigation and error-free usage before submission.  
-- Fix any identified bugs promptly.  
-
 ---
 
 ## **Test Data**
@@ -135,13 +118,126 @@ To demonstrate functionality, the application comes with sample data:
 
 - **Jobs:**  
   - Software Developer  
+     - Description - Designs, develops, and maintains software applications, ensuring they meet user needs and performance requirements. Collaborates with cross-functional teams to write clean, efficient, and scalable code.
   - Product Manager  
+     - Description - Oversees the entire product lifecycle, from ideation to launch, ensuring alignment with business goals and user needs. Coordinates with stakeholders to define product features and prioritize development efforts.
   - Data Scientist  
+     - Analyzes complex datasets to uncover actionable insights and build predictive models. Leverages statistical methods and machine learning algorithms to solve business problems and drive data-driven decisions.
 
-- **Sample Assessment Questions:**  
-  - What is React?  
-  - Explain the Context API.  
-  - Define Machine Learning.  
 
+# Sample Assessment Questions
+
+### Software Developer
+
+- **Question 1:** What is the primary purpose of version control systems like Git?
+  - Testing software
+  - Tracking and managing code changes
+  - Compiling code
+  - Debugging applications
+  - **Correct Answer:** Option 2 - Tracking and managing code changes
+
+- **Question 2:** Which programming paradigm focuses on objects and their interactions?
+  - Functional programming
+  - Procedural programming
+  - Object-oriented programming
+  - Logical programming
+  - **Correct Answer:** Option 3 - Object-oriented programming
+
+- **Question 3:** What is the role of a software developer in the Agile methodology?
+  - Writing code only at the start of a project
+  - Building and delivering incremental updates based on user feedback
+  - Creating only project documentation
+  - Debugging at the end of the project
+  - **Correct Answer:** Option 2 -  Building and delivering incremental updates based on user feedback
+
+- **Question 4:** What does "DRY" stand for in software development?
+  - Do Right Yesterday
+  - Don't Repeat Yourself
+  - Develop Rapidly, Yes
+  - Debugging Runs Yearly
+  - **Correct Answer:** Option 2 - Don't Repeat Yourself
+
+- **Question 5:** Which of these is a commonly used JavaScript framework?
+  - Django
+  - Flask
+  - React
+  - Spring
+  - **Correct Answer:** Option 3 - React
+
+### Product Manager
+
+- **Question 1:** What is the primary responsibility of a product manager?
+  - Writing code
+  - Managing team schedules
+  - Defining product vision and strategy
+  - Creating financial reports
+  - **Correct Answer:** Option 3 - Defining product vision and strategy
+
+- **Question 2:** In product development, what does "MVP" stand for?
+  - Most Valuable Product
+  - Minimum Viable Product
+  - Maximum Value Proposition
+  - Market Viability Process
+  - **Correct Answer:** Option 2 - Minimum Viable Product
+
+- **Question 3:** What tool is commonly used to track tasks in Agile project management?
+  - Trello
+  - Visual Studio
+  - Slack
+  - GitHub
+  - **Correct Answer:** Option 1 - Trello
+
+- **Question 4:** What is a key component of a product roadmap?
+  - Budget details
+  - Feature priorities and release timeline
+  - Employee performance reviews
+  - Marketing ads
+  - **Correct Answer:** Option 2 - Feature priorities and release timeline
+
+- **Question 5:** Which of the following is a prioritization framework for product features?
+  - SWOT Analysis
+  - RICE Scoring Model
+  - Kanban Chart
+  - 5 Whys
+  - **Correct Answer:** Option 2 - RICE Scoring Model
+
+### Data Scientist
+
+- **Question 1:** What is the primary goal of a Data Scientist?
+  - Writing code for web development
+  - Managing customer relationships
+  - Extracting insights from data
+  - Selling data to clients
+  - **Correct Answer:** Option 3 - Extracting insights from data
+
+- **Question 2:** Which machine learning algorithm is used for classification tasks?
+  - Linear Regression
+  - K-Nearest Neighbors
+  - Principal Component Analysis
+  - K-Means Clustering
+  - **Correct Answer:** Option 2 - K-Nearest Neighbors
+
+- **Question 3:** What does the term "overfitting" refer to in machine learning?
+  - A model that performs poorly on both training and test data
+  - A model that captures noise in the training data and performs poorly on test data
+  - A model that has too many features
+  - A model that uses incorrect algorithms
+  - **Correct Answer:** Option 2 - A model that captures noise in the training data and performs poorly on test data
+
+- **Question 4:** Which programming language is widely used for data analysis?
+  - Java
+  - Python
+  - Ruby
+  - C#
+  - **Correct Answer:** Option 2 - Python
+
+- **Question 5:** What is the purpose of a confusion matrix in machine learning?
+  - To debug code
+  - To measure the performance of a classification model
+  - To visualize data
+  - To train the model
+  - **Correct Answer:** Option 2 - To measure the performance of a classification model
+    
+  
 - **Candidates:**  
   - Candidate details are optional but can be extended for enhanced features.  
